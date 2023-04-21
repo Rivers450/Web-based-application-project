@@ -1,0 +1,49 @@
+<%- include('../partials/header.ejs')%>
+    <div class="content">
+        <div class="eventTitle">
+            <h4>
+                <div id="biggerTxt">
+                    <%= event.title%>
+                </div>
+            </h4>
+        </div>
+        <div id="ShowFonts">
+            <div id="CategoryAlign">
+                <b>Category: </b>
+                <%= event.category%>
+            </div>
+            <div id="hostAlign">
+                <b>Host: </b>
+                <%= event.host.firstName + ' ' + event.host.lastName%>
+            </div>
+            <div id="startAlign">
+                <b>Start Date and Time: </b>
+                <%= (new Date(event.startTime)).toLocaleString() %>
+            </div>
+            <div id="endAlign">
+                <b>End Date and Time: </b>
+                <%= (new Date(event.endTime)).toLocaleString() %>
+            </div>
+            <div id="locationAlign">
+                <b>Location: </b>
+                <%= event.location%>
+            </div>
+            <div id="detailsAlign">
+                <b>Details: </b>
+                <%= event.details%>
+            </div>
+            <img src="/<%= event.image %>" id="size" alt="<%= event.title%> title">
+        </div>
+    </div>
+    <% if (event.host._id==user) { %>
+        <form id="alignButtons"><br><br>
+            <button type="submit" id="editPageButtons" formmethod="GET" formaction="/events/<%=event.id%>/edit">
+                <i class="fa-sharp fa-solid fa-pen-to-square" style="color: #228b22;"></i>
+            </button>
+            <button type="submit" id="editPageButtons" formmethod="POST"
+                formaction="/events/<%=event.id%>?_method=DELETE">
+                <i class="fa-sharp fa-solid fa-trash" style="color: #ff0000;"></i></button>
+        </form>
+        <% } %>
+
+            <%- include('../partials/footer.ejs')%>
